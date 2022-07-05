@@ -1,0 +1,331 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+.header-container {
+    height: 144px;
+    display: block;
+}
+
+.header {
+    display: block;
+}
+
+.header-first {
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    padding-top: 8px;
+
+}
+
+.header-logo {
+    height: 90px;
+    width: 60px;
+}
+
+.header-title {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-title__first {
+    font-size: 1.6rem;
+    color: rgb(34, 145, 255);
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.header-title__second {
+    font-size: 1.6rem;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: left;
+    float: left
+}
+
+
+/* navbar */
+.nav-container {
+    background-color: #2291ff;
+    height: 44px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav {
+    margin-left: 24px;
+}
+
+.nav-item {
+    display: inline-block;
+    /* text-align: center */
+    align-items: center;
+    line-height: 46px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #fff;
+    list-style-type: none;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 0 12px;
+}
+
+.time-container {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+}
+
+.datetime {
+    background-color: rgb(15, 128, 239);
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 4px;
+    display: flex;
+}
+
+/*  */
+#map {
+    height: 600px;
+    width: 927px;
+}
+
+#map .leaflet-div-icon {
+    width: 40px !important;
+    height: 40px !important;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    position: relative;
+}
+
+#map .leaflet-div-icon span {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#map .leaflet-div-icon ::after {
+    content: "";
+    /* background-color: #fff; */
+    position: absolute;
+    bottom: -7px;
+    right: 12px;
+    /* height: 20px;
+    width: 20px; */
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #fff;
+    /* Tam giác phía trên được đổ màu */
+
+}
+
+
+/* Chart */
+.carousel-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.canvas {
+    width: 420px !important;
+    height: 420px !important;
+}
+
+.stations {
+    width: 408px;
+    padding-left: 16px;
+    /* overflow: scroll; */
+}
+
+#stations {
+    padding: 4px;
+    outline: none;
+}
+
+.station-detail {
+    margin-top: 16px;
+    width: 100%;
+    height: 100%
+}
+
+.station__header {
+    height: 60px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+}
+
+.station__name {
+    color: #000;
+    font-size: 20px;
+    margin-right: 48px;
+    font-weight: 600;
+}
+
+.station__temphumi {
+    display: flex;
+}
+
+.station__temp {
+    font-size: 16px;
+    width: 70px;
+    margin-right: 8px;
+}
+
+.station__temp span {
+    font-weight: 500;
+}
+
+.station__temp i {
+    background-image: linear-gradient(rgb(255, 231, 144) 0%, rgb(254, 202, 87) 100%);
+    color: #fff;
+}
+
+.station__humi {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.station__humi i {
+    background-image: linear-gradient(rgb(126, 239, 253) 0%, rgb(72, 219, 251) 100%);
+    color: #fff;
+}
+
+.station__body {
+    width: 366px;
+    height: 168px;
+    /* background-color: #f3eb00; */
+    display: flex;
+    align-items: center;
+}
+
+.station__aqi {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.station__status {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.station__text {
+    flex: 2;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+.station__aqinumber {
+    font-size: 48px;
+}
+
+.station__value {
+    margin-top: 36px;
+    width: 366px;
+    height: 102px;
+    background-color: rgb(250, 250, 250);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.station__title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.station__val {
+    font-size: 28px;
+    font-weight: 600;
+    color: rgb(33, 144, 254);
+}
+
+.station__value>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.station__update {
+    margin-top: 16px;
+    font-size: 16px;
+    font-style: italic;
+    color: rgb(155, 155, 155);
+}
+
+#chartTemp {
+    width: 100%;
+}
+
+.carousel-control-prev {
+    left: -4%;
+}
+
+.carousel-control-next {
+    right: -4%;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    width: 4% !important;
+}
+
+.carousel-icon {
+    color: #000 !important;
+}
+
+canvas {
+    transition: none !important;
+    min-height: 570px;
+}
+
+span.carousel-icon {
+    font-size: 2rem;
+}
+
+
+.footer {
+    margin-top: 48px;
+    min-height: 300px;
+    background-image: url('https://moitruongthudo.vn/static/images/header/hanoi.png');
+}
+
+select {
+    min-width: 120px;
+    padding: 7px 40px 7px 12px;
+    /* width: 100%; */
+    border: 1px solid #E8EAED;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098A9;
+    font-size: 16px;
+    cursor: pointer;
+}
