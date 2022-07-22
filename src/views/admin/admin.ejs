@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/admin/map.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="sidebar-container">
+            <div class="sidebar sidebar--collapse">
+                <div class="sidebar__logo-container">
+                    <img src="/img/LogoHust.png" alt="logo" onclick="window.location.href='/admin/home'">
+                    <div class="sidebar__heading">
+                        <div class="sidebar__heading--text text1">
+                            Air Quality Index
+                        </div>
+                        <div class="sidebar__heading--text text2">
+                            Monitoring
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar__navigation">
+                    <a href="#" class="sidebar__navigation__route active btn">
+
+                        <div class="sidebar__navigation__route__icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+                        <div class="sidebar__navigation__route__text">Quản lý</div>
+
+                    </a>
+
+                    <a href="/admin/stats" class="sidebar__navigation__route btn">
+
+                        <div class="sidebar__navigation__route__icon">
+                            <i class="fa-solid fa-chart-column"></i>
+                        </div>
+                        <div class="sidebar__navigation__route__text">Thống kê</div>
+
+                    </a>
+
+                    <a href="/admin/map" class="sidebar__navigation__route btn">
+                        <div class="sidebar__navigation__route__icon">
+                            <i class="fa-solid fa-map"></i>
+                        </div>
+                        <div class="sidebar__navigation__route__text">Bản đồ</div>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Button Collapse -->
+            <div class="collapse-button">
+                <div class="collapse-button__wrapper">
+                    <i class="fa-solid fa-angles-right"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container">
+            <div class="header">
+                <div class=""></div>
+                <div class="header__notification">
+                    <div class="" data-bs-toggle="dropdown">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="bg-danger header__notification__badge"> 1 </span>
+                    </div>
+                    <ul class="dropdown-menu header__notification__dropdown">
+                        <h4>Thông báo</h4>
+                        <li class="dropdown-item">
+                            <div class="header__notification__dropdown__image">
+                                <img src="" alt="logo">
+                            </div>
+                            <div class="header__notification__dropdown__text">
+                                <div class="header__notification__dropdown__text__alert">
+                                    Thêm điểm đo mới
+                                </div>
+                                <div class="header__notification__dropdown__text__time">
+                                    Vài giây trước
+                                </div>
+                            </div>
+                            <div class="header__notification__dropdown__status"></div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="header__user">
+                    <div class="header__user__wrapper" data-bs-toggle="dropdown">
+                        <div class="header__user__img-container">
+                            <img src="/img/CR7.png" alt="avatar">
+                        </div>
+                        <span class="header__user__username">
+                            <%= username %>
+                        </span>
+                    </div>
+                    <ul class="dropdown-menu header__user__dropdown">
+                        <li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-personal">
+                            <div class="header__user__dropdown__icon">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div class="header__user__dropdown__text">
+                                Thông tin tài khoản
+                            </div>
+                        </li>
+                        <li class="dropdown-item">
+                            <div class="header__user__dropdown__icon">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            </div>
+                            <div class="header__user__dropdown__text">
+                                <a href="/auth/logout/">Đăng xuất</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Phần content -->
+            <div class="content">
+                <div class="table-responsive">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h2>Danh Sách Trạm Đo</h2>
+                                </div>
+                                <div class="col-sm-6 d-flex align-items-center gap-3 justify-content-end">
+                                    <!-- Add Station -->
+                                    <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Thêm
+                                        điểm đo</button>
+
+                                    <!-- Search -->
+                                    <div class="table__search">
+                                        <i class="fa fa-search"></i>
+                                        <input type="search" id="search" class="form-control form-input" name="search"
+                                            placeholder="Search">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-hover">
+
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Modal add station -->
+                <div class="modal fade" id="modalAddStation" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm điểm đo</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex">
+                                <div id="map"></div>
+                                <div class="add__station--info px-3">
+                                    <label for="add__station--mac">Địa chỉ MAC</label>
+                                    <input id="add__station--mac" type="text" disabled>
+                                    <label for="add__station--name">Vị trí điểm đo</label>
+                                    <input id="add__station--name" type="text" placeholder="Nhập vị trí...">
+                                    <label for="add__station--lat">Vĩ độ</label>
+                                    <input id="add__station--lat" type="text">
+                                    <label for="add__station--lng">Kinh độ</label>
+                                    <input id="add__station--lng" type="text">
+                                    <div class="btn__modal--add mt-3">
+                                        <button type="button" id="btn_add_station" class="btn btn_add_station">Xác
+                                            nhận</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Hủy</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Alert -->
+                <div class="modal" tabindex="-1" role="dialog" id='modal-alert'>
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body d-flex align-items-center">
+                                <p class="w-100"></p>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button value="0" id='update-change' type="button" class="btn btn-primary"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Make sure you put this AFTER Leaflet's CSS -->
+            <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+                integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+                crossorigin=""></script>
+            <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+                integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+                integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+                integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="/js/admin/map.js"></script>
+            <script src="/js/base.js"></script>
+</body>
+
+</html>

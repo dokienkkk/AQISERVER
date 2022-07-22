@@ -1,0 +1,19 @@
+.content {
+    margin: 5px;
+}
+
+.content__body {
+    overflow-x: auto;
+}
+
+table.table tr th:first-child {
+    width: auto;
+}
+
+table.table tr th:last-child {
+    width: 132px;
+}
+
+.table__download:hover {
+    cursor: pointer;
+}

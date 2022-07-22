@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/admin/stats.css">
+
+    <!-- <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script> -->
+    <!-- use version 0.18.9 -->
+    <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.18.9/package/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="sidebar-container">
+            <div class="sidebar sidebar--collapse">
+                <div class="sidebar__logo-container">
+                    <img src="/img/LogoHust.png" alt="logo" onclick="window.location.href='/admin/home'">
+                    <div class="sidebar__heading">
+                        <div class="sidebar__heading--text text1">
+                            Air Quality Index
+                        </div>
+                        <div class="sidebar__heading--text text2">
+                            Monitoring
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar__navigation">
+                    <a href="/admin/home" class="sidebar__navigation__route btn">
+
+                        <div class="sidebar__navigation__route__icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+                        <div class="sidebar__navigation__route__text">Quản lý</div>
+
+                    </a>
+
+                    <a href="#" class="sidebar__navigation__route active btn">
+
+                        <div class="sidebar__navigation__route__icon">
+                            <i class="fa-solid fa-chart-column"></i>
+                        </div>
+                        <div class="sidebar__navigation__route__text">Thống kê</div>
+
+                    </a>
+
+                    <a href="/admin/map" class="sidebar__navigation__route btn">
+                        <div class="sidebar__navigation__route__icon">
+                            <i class="fa-solid fa-map"></i>
+                        </div>
+                        <div class="sidebar__navigation__route__text">Bản đồ</div>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Button Collapse -->
+            <div class="collapse-button">
+                <div class="collapse-button__wrapper">
+                    <i class="fa-solid fa-angles-right"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container">
+            <div class="header">
+                <div class=""></div>
+                <div class="header__notification">
+                    <div class="" data-bs-toggle="dropdown">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="bg-danger header__notification__badge"> 1 </span>
+                    </div>
+                    <ul class="dropdown-menu header__notification__dropdown">
+                        <h4>Thông báo</h4>
+                        <li class="dropdown-item">
+                            <div class="header__notification__dropdown__image">
+                                <img src="" alt="logo">
+                            </div>
+                            <div class="header__notification__dropdown__text">
+                                <div class="header__notification__dropdown__text__alert">
+                                    Thêm điểm đo mới
+                                </div>
+                                <div class="header__notification__dropdown__text__time">
+                                    Vài giây trước
+                                </div>
+                            </div>
+                            <div class="header__notification__dropdown__status"></div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="header__user">
+                    <div class="header__user__wrapper" data-bs-toggle="dropdown">
+                        <div class="header__user__img-container">
+                            <img src="/img/CR7.png" alt="avatar">
+                        </div>
+                        <span class="header__user__username">
+                            <%= username %>
+                        </span>
+                    </div>
+                    <ul class="dropdown-menu header__user__dropdown">
+                        <li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-personal">
+                            <div class="header__user__dropdown__icon">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div class="header__user__dropdown__text">
+                                Thông tin tài khoản
+                            </div>
+                        </li>
+                        <li class="dropdown-item">
+                            <div class="header__user__dropdown__icon">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            </div>
+                            <div class="header__user__dropdown__text">
+                                <a href="/auth/logout/">Đăng xuất</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Phần content -->
+            <div class="content">
+                <label for="stations">Trạm đo</label>
+                <select id="stations"></select>
+                <label for="date">Ngày:</label>
+                <input type="date" id="date" name="date">
+
+                <div class="content__body">
+
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+                integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+                integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+                integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+            <script src="/js/base.js"></script>
+            <script src="/js/admin/stats.js"></script>
+</body>
+
+</html>

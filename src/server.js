@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import viewEngineConfigc from "./configc/viewEngine"
 import initWebRoute from "./router/web"
+import initWebRouteAdmin from "./router/admin"
 import formatDate from "./utils/date"
 import pool from "./configc/connectDB"
 dotenv.config()
@@ -15,6 +16,7 @@ app.use(express.json())
 
 viewEngineConfigc(app)
 initWebRoute(app)
+initWebRouteAdmin(app)
 
 //MQTT Subscribe
 const mqtt = require('mqtt')
@@ -37,7 +39,7 @@ client.on('message', async function (topic, payload, packet) {
     // console.log(`Topic: ${topic}`)
     //console.log(payload.toString())
     //data.push(payload.toString())
-    let data  = JSON.parse(payload.toString())
+    let data = JSON.parse(payload.toString())
     const date = new Date()
     const time = formatDate(date)
     await pool.execute(`INSERT INTO data (mac,temp,humi,co,p25,p10) VALUES ('${data.mac}','${data.temp}','${data.humi}','${data.co}','${data.p25}','${data.p10}')`)
