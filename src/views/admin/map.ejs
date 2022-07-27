@@ -136,7 +136,24 @@
 
             <!-- Phần content -->
             <div class="content">
-                <div id="map"></div>
+                <div id="map">
+                    <div class="map__label">
+                        <div class="map__label--text">Đơn vị tính (nghìn người/km<sup>2</sup>)</div>
+                        <div class="map__label--list">
+                            <div style="background-color: #fee6db;" class="map__label--item"></div>
+                            <div style="background-color: #fcb297;" class="map__label--item"></div>
+                            <div style="background-color: #fb7253;" class="map__label--item"></div>
+                            <div style="background-color: #e03831;" class="map__label--item"></div>
+                            <div style="background-color: #aa1b21;" class="map__label--item"></div>
+                        </div>
+                        <div class="map__label--value">
+                            <div>5</div>
+                            <div>10</div>
+                            <div>20</div>
+                            <div>40</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="coordinate"></div>
             </div>
 
@@ -157,6 +174,7 @@
                 integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="/js/base.js"></script>
+            <script src="/js/admin/geojson.js"></script>
             <script src="/js/admin/map.js"></script>
 </body>
 

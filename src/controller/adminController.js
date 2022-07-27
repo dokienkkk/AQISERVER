@@ -24,9 +24,9 @@ const getStatus = async (req, res) => {
 }
 
 const getAdminHomePage = async (req, res) => {
-    // if (!req.session.username) {
-    //     return res.redirect("/admin/login")
-    // }
+    if (!req.session.username) {
+        return res.redirect("/admin/login")
+    }
     //lấy thông tin user từ session
     const username = req.session.username
 
@@ -38,18 +38,18 @@ const getAdminHomePage = async (req, res) => {
 }
 
 const getAdminMapPage = (req, res) => {
-    // if (!req.session.username) {
-    //     return res.redirect("/admin/login")
-    // }
+    if (!req.session.username) {
+        return res.redirect("/admin/login")
+    }
     //lấy thông tin user từ session
     const username = req.session.username
     return res.render("admin/map.ejs", { username })
 }
 
 const getAdminStatsPage = (req, res) => {
-    // if (!req.session.username) {
-    //     return res.redirect("/admin/login")
-    // }
+    if (!req.session.username) {
+        return res.redirect("/admin/login")
+    }
     //lấy thông tin user từ session
     const username = req.session.username
     return res.render("admin/stats.ejs", { username })

@@ -399,7 +399,7 @@ const addStation = async (req, res) => {
     const lng = req.body.lng
     try {
         //add station to db station
-        await pool.execute(`insert into station(name,lat,lng,mac) values('${name}','${lat}','${lng}','${mac}')`)
+        // await pool.execute(`insert into station(name,lat,lng,mac) values('${name}','${lat}','${lng}','${mac}')`)
         //update column statusAdd on db add_station
         await pool.execute(`UPDATE add_station SET statusAdd = '1' WHERE mac = '${mac}';`)
 
