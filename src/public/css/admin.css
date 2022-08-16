@@ -274,3 +274,7 @@ body {
     }
 
 }
+
+.toggle-password:hover {
+    cursor: pointer;
+}

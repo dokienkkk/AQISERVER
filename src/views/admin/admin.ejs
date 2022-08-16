@@ -80,7 +80,7 @@
         <div class="content-container">
             <div class="header">
                 <div class=""></div>
-                <div class="header__notification">
+                <div class="header__notification d-none ">
                     <div class="" data-bs-toggle="dropdown">
                         <i class="fa-regular fa-bell"></i>
                         <span class="bg-danger header__notification__badge"> 1 </span>
@@ -197,6 +197,41 @@
                     </div>
                 </div>
 
+                <!-- Modal Change Information -->
+                <div class="modal fade" id="modalChangeInfo" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Sửa thông tin điểm đo</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex">
+                                <!-- <div id="map"></div> -->
+                                <div class="add__station--info px-3">
+
+                                    <label for="add__station--name">Vị trí điểm đo</label>
+                                    <input id="add__station--name" type="text" placeholder="Nhập vị trí...">
+                                    <label for="add__station--mac">Địa chỉ MAC</label>
+                                    <input id="add__station--mac" type="text" disabled>
+                                    <label for="add__station--lat">Vĩ độ</label>
+                                    <input id="add__station--lat" type="text" disabled>
+                                    <label for="add__station--lng">Kinh độ</label>
+                                    <input id="add__station--lng" type="text" disabled>
+                                    <div class="btn__modal--add mt-3">
+                                        <button type="button" id="btn_change_station"
+                                            class="btn btn_change_info_station">Xác
+                                            nhận</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Hủy</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Modal Alert -->
                 <div class="modal" tabindex="-1" role="dialog" id='modal-alert'>
                     <div class="modal-dialog" role="document">
@@ -228,6 +263,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
                 integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="/js/admin/geojson.js"></script>
             <script src="/js/admin/map.js"></script>
             <script src="/js/base.js"></script>
 </body>

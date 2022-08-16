@@ -18,6 +18,7 @@ function renderStation() {
     $.ajax(`http://localhost:8000/stations?search=${search}`, {
         async: false,
         success: function (data) {
+            console.log(data)
             $(".table.table-hover").html(`
             <thead>
                 <tr>
@@ -46,6 +47,10 @@ function renderStation() {
                     </td>
                     <td class="d-flex">
                         <div class="settings" title="Settings">
+                            <input type="hidden" name="setting__name" value="${data[i].name}">
+                            <input type="hidden" name="setting__mac" value="${data[i].mac}">
+                            <input type="hidden" name="setting__lat" value="${data[i].lat}">
+                            <input type="hidden" name="setting__lng" value="${data[i].lng}">
                             <i class="fa-solid fa-pen-to-square"></i>
                             Chỉnh sửa
                         </div>
@@ -160,10 +165,10 @@ $("#update-change").click(function () {
 
 //POST add station
 $("#btn_add_station").click(() => {
-    const mac = $("#add__station--mac").val()
-    const name = $("#add__station--name").val()
-    const lat = $("#add__station--lat").val()
-    const lng = $("#add__station--lng").val()
+    const mac = $("#modalAddStation #add__station--mac").val()
+    const name = $("#modalAddStation #add__station--name").val()
+    const lat = $("#modalAddStation #add__station--lat").val()
+    const lng = $("#modalAddStation #add__station--lng").val()
     if (!mac || !name || !lat || !lng) {
         $("#modal-alert p").text("Bạn cần nhập đủ thông tin")
         $('#update-change').val('0');
@@ -198,9 +203,59 @@ $("#btn_add_station").click(() => {
     });
 })
 
+//modal thay đổi thông tin điểm đo (đổi tên)
+$(".settings").click(function () {
+    let name = $(this).find("input[name='setting__name']").val()
+    let mac = $(this).find("input[name='setting__mac']").val()
+    let lat = $(this).find("input[name='setting__lat']").val()
+    let lng = $(this).find("input[name='setting__lng']").val()
+
+    $("#modalChangeInfo #add__station--name").val(name)
+    $("#modalChangeInfo #add__station--mac").val(mac)
+    $("#modalChangeInfo #add__station--lat").val(lat)
+    $("#modalChangeInfo #add__station--lng").val(lng)
+    $("#modalChangeInfo").modal("show")
+})
+
+//change info station: UPDATE 
+$("#btn_change_station").click(function () {
+    const mac = $("#modalChangeInfo #add__station--mac").val()
+    const name = $("#modalChangeInfo #add__station--name").val()
+    if (!mac || !name) {
+        $("#modal-alert p").text("Bạn cần nhập đủ thông tin")
+        $('#update-change').val('0');
+        $('#update-change').text('OK')
+        $("#modal-alert").modal("show")
+        return
+    }
+    let data = {
+        name
+    }
+    $.ajax({
+        type: 'PUT',
+        url: `/stations/${mac}`,
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify(data),
+        dataType: 'json',
+        success: function (response) {
+            console.log(response)
+            //Hiển thị modal alert thông báo:
+            $("#modalChangeInfo").modal("hide")
+            $("#modal-alert p").text(response.status)
+            $('#update-change').val('2');
+            $('#update-change').text('OK')
+            $("#modal-alert").modal("show")
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+})
+
 //reset lại thông tin các input khi đóng modal add station
 $("#modalAddStation").on('hidden.bs.modal', function (e) {
-    $("#add__station--mac").val("")
+    $("#add__station--lng").val("")
     $("#add__station--name").val("")
     $("#add__station--lat").val("")
     $("#add__station--lng").val("")

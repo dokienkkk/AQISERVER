@@ -17,3 +17,10 @@ table.table tr th:last-child {
 .table__download:hover {
     cursor: pointer;
 }
+
+h2.content__body--none {
+    text-align: center;
+    margin-top: 60px;
+    color: grey;
+    font-size: 24px;
+}

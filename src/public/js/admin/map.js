@@ -61,6 +61,7 @@ map.on('click', (e) => {
 })
 
 //leaflet search
+console.log("Add ô tìm kiếm trên bản đồ")
 L.Control.geocoder().addTo(map);
 
 // Load Leaflet in Modal Fix Bug

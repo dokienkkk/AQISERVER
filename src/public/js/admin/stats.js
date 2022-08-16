@@ -89,7 +89,7 @@ function loadAQI() {
         async: false,
         success: function (data) {
             if (data.status) {
-                $(".content__body").html("<h2>Không có dữ liệu</h2>")
+                $(".content__body").html("<h2 class='content__body--none'>Không có dữ liệu</h2>")
             } else {
                 $(".content__body").html(`
                     <div class="table-responsive">

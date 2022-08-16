@@ -53,6 +53,9 @@ const initWebRoute = app => {
         //api xóa điểm đo
         Router.delete("/stations/:mac",homeController.deleteStation)
 
+        //api update điểm đo
+        Router.put("/stations/:mac",homeController.updateStation)
+
 
     
 

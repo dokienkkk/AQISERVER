@@ -399,9 +399,11 @@ const addStation = async (req, res) => {
     const lng = req.body.lng
     try {
         //add station to db station
-        // await pool.execute(`insert into station(name,lat,lng,mac) values('${name}','${lat}','${lng}','${mac}')`)
         //update column statusAdd on db add_station
         await pool.execute(`UPDATE add_station SET statusAdd = '1' WHERE mac = '${mac}';`)
+
+        //add station 
+        await pool.execute(`insert into station(name,lat,lng,mac) values('${name}','${lat}','${lng}','${mac}')`)
 
         return res.json({ "status": "Thêm mới điểm đo thành công" })
     } catch (err) {
@@ -421,6 +423,17 @@ const deleteStation = async (req, res) => {
     }
 }
 
+const updateStation = async (req, res) => {
+    const mac = req.params.mac
+    const name = req.body.name
+    try {
+        await pool.execute(`UPDATE station SET name = '${name}' WHERE mac = '${mac}'`)
+        return res.json({ "status": "Thay đổi thông tin thành công" })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getHomePage,
     getData,
@@ -435,5 +448,6 @@ module.exports = {
     checkAddStationByMac,
     checkAddStation,
     addStation,
-    deleteStation
+    deleteStation,
+    updateStation
 }
